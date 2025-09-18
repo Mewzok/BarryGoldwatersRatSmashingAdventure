@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: da90765b5cd1248b78bbb0f18e4b13ab
+guid: 5c2a81d790f6d4be2a206ddffb82edd6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3453608003459820483
-    second: BGRSABackground 1_0
+      213: -1459605333989530310
+    second: BarryGoldwaterBack_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BGRSABackground 1_0
+      name: BarryGoldwaterBack_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 720
-        height: 1024
+        x: 1
+        y: 2
+        width: 73
+        height: 167
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3cb2baf5e2eadef20800000000000000
-      internalID: 3453608003459820483
+      spriteID: a35e94b9ea07ebbe0800000000000000
+      internalID: -1459605333989530310
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      BGRSABackground 1_0: 3453608003459820483
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
