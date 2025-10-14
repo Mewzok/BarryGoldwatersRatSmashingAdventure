@@ -18,25 +18,34 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check current animation state
+        var currentState = animator.GetCurrentAnimatorStateInfo(0);
+
+        // receive position
         Vector3 pos = transform.position;
 
-        if(Input.GetKeyDown(KeyCode.Q)) {
-            pos = new Vector3(qPos, pos.y, pos.z);
-            animator.SetTrigger("DoAction");
-        }
+        if(currentState.IsName("BarryIdle")) {
+            if(Input.GetKeyDown(KeyCode.Q)) {
+                pos = new Vector3(qPos, pos.y, pos.z);
+                animator.SetTrigger("DoAction");
+            }
 
-        if(Input.GetKeyDown(KeyCode.W)) {
-            pos = new Vector3(wPos, pos.y, pos.z);
-        }
+            if(Input.GetKeyDown(KeyCode.W)) {
+                pos = new Vector3(wPos, pos.y, pos.z);
+                animator.SetTrigger("DoAction");
+            }
 
-        if(Input.GetKeyDown(KeyCode.E)) {
-            pos = new Vector3(ePos, pos.y, pos.z);
-        }
+            if(Input.GetKeyDown(KeyCode.E)) {
+                pos = new Vector3(ePos, pos.y, pos.z);
+                animator.SetTrigger("DoAction");
+            }
 
-        if(Input.GetKeyDown(KeyCode.R)) {
-            pos = new Vector3(rPos, pos.y, pos.z);
-        }
+            if(Input.GetKeyDown(KeyCode.R)) {
+                pos = new Vector3(rPos, pos.y, pos.z);
+                animator.SetTrigger("DoAction");
+            }
 
-        transform.position = pos;
+            transform.position = pos;
+        }
     }
 }
