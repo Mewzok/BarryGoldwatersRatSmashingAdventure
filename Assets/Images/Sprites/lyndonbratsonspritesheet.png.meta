@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 649dcd8eb977b41f68216c5d0c75bb41
+guid: 659fa4bc4cccd4c1eaf833fd26740c1a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6922080110141321396
-    second: RatIdle_0
+      213: 1027658702484874614
+    second: lyndonbratsonspritesheet_0
+  - first:
+      213: 1804120182090762498
+    second: lyndonbratsonspritesheet_1
+  - first:
+      213: -7918300498533712182
+    second: lyndonbratsonspritesheet_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,23 +132,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RatIdle_0
+      name: lyndonbratsonspritesheet_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 42
-        height: 90
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c4fca3880d4dfef90800000000000000
-      internalID: -6922080110141321396
+      spriteID: 67523f7252af24e00800000000000000
+      internalID: 1027658702484874614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lyndonbratsonspritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20902a93fb5890910800000000000000
+      internalID: 1804120182090762498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lyndonbratsonspritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ace791846ab8c1290800000000000000
+      internalID: -7918300498533712182
       vertices: []
       indices: 
       edges: []
@@ -151,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 721809c6c9feb4836819e5490b98bd28
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RatIdle_0: -6922080110141321396
+      lyndonbratsonspritesheet_0: 1027658702484874614
+      lyndonbratsonspritesheet_1: 1804120182090762498
+      lyndonbratsonspritesheet_2: -7918300498533712182
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
