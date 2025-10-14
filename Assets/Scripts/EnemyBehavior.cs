@@ -15,4 +15,8 @@ public class EnemyBehavior : MonoBehaviour
     {
         transform.Translate(Vector3.down * Time.deltaTime * speed);
     }
+
+    public void OnDespawn() {
+        // future logic when rat gets passed
+    }
 }
