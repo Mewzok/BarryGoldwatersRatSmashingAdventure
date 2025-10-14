@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    Animator animator;
+
     private float qPos = -2.43f;
     private float wPos = -0.91f;
     private float ePos = 0.9f;
@@ -10,7 +12,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Q)) {
             pos = new Vector3(qPos, pos.y, pos.z);
+            animator.SetTrigger("DoAction");
         }
 
         if(Input.GetKeyDown(KeyCode.W)) {
