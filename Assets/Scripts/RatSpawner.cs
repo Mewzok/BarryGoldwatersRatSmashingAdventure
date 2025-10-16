@@ -4,6 +4,7 @@ public class RatSpawner : MonoBehaviour
 {
     public GameObject ratPrefab;
     public Transform[] spawnPoints;
+    public LaneManager laneManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,6 +21,11 @@ public class RatSpawner : MonoBehaviour
     void SpawnRat() {
         int randNum = Random.Range(0, spawnPoints.Length);
         Transform spawnPoint = spawnPoints[randNum];
-        Instantiate(ratPrefab, spawnPoint.position, Quaternion.identity);
+
+        GameObject ratObj = Instantiate(ratPrefab, spawnPoint.position, Quaternion.identity);
+        EnemyBehavior rat = ratObj.GetComponent<EnemyBehavior>();
+        rat.lane = randNum;
+        
+        laneManager.RegisterRat(rat);
     }
 }
