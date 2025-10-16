@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private float good = 0.25f;
     private float okay = 0.5f;
 
-    private float targetLineY = -4.28f;
+    private float targetLineY = -4.10f;
 
     public List<EnemyBehavior> activeRats = new List<EnemyBehavior>();
 
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"ClosestDist={closestDist:F3}, ClosestRat={closestRat?.name ?? "none"}");
 
         // if there's at least one rat in lane, it's in at least "okay" range and it's within reach it's smashable
-        if(closestRat != null && closestDist <= okay && closestRat.transform.position.y < -3.10) {
+        if(closestRat != null && closestDist <= okay && closestRat.transform.position.y < -3.90) {
             int points = 0;
 
             if(closestDist <= perfect) {
