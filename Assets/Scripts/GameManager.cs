@@ -76,6 +76,9 @@ public class GameManager : MonoBehaviour
             // stop rat movement
             closestRat.speed = 0f;
 
+            // play particle effects
+            FeedbackManager.Instance.PlaySmashEffects(closestRat.transform.position);
+
             UnregisterRat(closestRat);
             Destroy(closestRat.gameObject, 5f);
         } else {
