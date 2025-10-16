@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
             animator.SetTrigger("SmashRat");
 
             // stop rat movement
-            closestRat.speed = 0f;
+            closestRat.isSmashed = true;
 
             // play particle effects
             FeedbackManager.Instance.PlaySmashEffects(closestRat.transform.position);
