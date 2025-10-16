@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"ClosestDist={closestDist:F3}, ClosestRat={closestRat?.name ?? "none"}");
 
         // if there's at least one rat in lane, it's in at least "okay" range and it's within reach it's smashable
-        if(closestRat != null && closestDist <= okay && closestRat.transform.position.y < -3) {
+        if(closestRat != null && closestDist <= okay && closestRat.transform.position.y < -3.10) {
             int points = 0;
 
             if(closestDist <= perfect) {
