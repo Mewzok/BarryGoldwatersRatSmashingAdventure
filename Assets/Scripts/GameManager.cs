@@ -68,8 +68,16 @@ public class GameManager : MonoBehaviour
 
             Debug.Log($"Rat hit in lane {lane}, Distance {closestDist:F3}, Points: {points}");
 
+
+            // animate smashed rat
+            Animator animator = closestRat.GetComponent<Animator>();
+            animator.SetTrigger("SmashRat");
+
+            // stop rat movement
+            closestRat.speed = 0f;
+
             UnregisterRat(closestRat);
-            Destroy(closestRat.gameObject);
+            Destroy(closestRat.gameObject, 5f);
         } else {
             Debug.Log($"Miss on lane {lane}. ClosestDist={closestDist:F3}");
         }
