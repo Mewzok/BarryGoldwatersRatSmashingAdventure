@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Animator animator;
 
-    public LaneManager laneManager;
+    public GameManager gameManager;
 
     private float qPos = -2.43f;
     private float wPos = -0.91f;
@@ -32,25 +32,25 @@ public class PlayerController : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Q)) {
                 pos = new Vector3(qPos, pos.y, pos.z);
                 animator.SetTrigger("DoAction");
-                laneManager.CheckHit(0);
+                gameManager.CheckHit(0);
             }
 
             if(Input.GetKeyDown(KeyCode.W)) {
                 pos = new Vector3(wPos, pos.y, pos.z);
                 animator.SetTrigger("DoAction");
-                laneManager.CheckHit(1);
+                gameManager.CheckHit(1);
             }
 
             if(Input.GetKeyDown(KeyCode.E)) {
                 pos = new Vector3(ePos, pos.y, pos.z);
                 animator.SetTrigger("DoAction");
-                laneManager.CheckHit(2);
+                gameManager.CheckHit(2);
             }
 
             if(Input.GetKeyDown(KeyCode.R)) {
                 pos = new Vector3(rPos, pos.y, pos.z);
                 animator.SetTrigger("DoAction");
-                laneManager.CheckHit(3);
+                gameManager.CheckHit(3);
             }
 
             transform.position = pos;

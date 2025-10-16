@@ -670,6 +670,7 @@ MonoBehaviour:
   - {fileID: 311597078}
   - {fileID: 3503017}
   - {fileID: 941974392}
+  gameManager: {fileID: 1814215436}
 --- !u!1 &1219414656
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +829,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneKey: 0
+--- !u!1 &1814215435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1814215437}
+  - component: {fileID: 1814215436}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1814215436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814215435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da5d1d403399473894e3a8505b9ddf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalPoints: 0
+  activeRats: []
+--- !u!4 &1814215437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814215435}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.8611968, y: -2.9732676, z: 0.036573395}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1898909982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,6 +1198,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7554816154609302167, guid: e0f253b98475147a0a9311d02c47611b, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1814215436}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1167,3 +1218,4 @@ SceneRoots:
   - {fileID: 1018956963}
   - {fileID: 1219414657}
   - {fileID: 685670368}
+  - {fileID: 1814215437}

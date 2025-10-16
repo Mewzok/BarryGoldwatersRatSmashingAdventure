@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
     public float speed = 10.0f;
-    private int lane;
+    public int lane;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,6 +18,6 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     public void OnDespawn() {
-        FindObjectOfType<LaneManager>().UnregisterRat(this);
+        FindFirstObjectByType<GameManager>().UnregisterRat(this);
     }
 }
