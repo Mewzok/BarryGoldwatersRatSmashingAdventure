@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private float ePos = 0.9f;
     private float rPos = 2.64f;
 
-    private float smashCooldown = 0.15f;
+    private float smashCooldown = 0.05f;
     private float smashTimer = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
