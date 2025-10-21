@@ -5,6 +5,20 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GameMode {
+        Election,
+        Endless
+    }
+
+    public enum Difficulty {
+        Easy,
+        Medium,
+        Hard
+    }
+
+    public GameMode currentMode = GameMode.Election;
+    public Difficulty currentDifficulty = Difficulty.Medium;
+
     public int totalPoints = 0;
 
     // thresholds for determining points when rat smashed

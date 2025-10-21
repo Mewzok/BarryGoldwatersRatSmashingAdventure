@@ -21,7 +21,7 @@ public class RatSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        SetupDifficulty();
     }
 
     // Update is called once per frame
@@ -56,5 +56,29 @@ public class RatSpawner : MonoBehaviour
         aura.transform.localPosition = Vector3.zero;
 
         gameManager.RegisterRat(rat);
+    }
+
+    void SetupDifficulty() {
+       // determine values based on difficulty
+        switch(gameManager.currentDifficulty) {
+            case Difficulty.Easy:
+                globalSpeedMultiplier = 0.7f;
+                speedIncreaseRate = 0.02f;
+                spawnInterval = 4f;
+                spawnIncreaseRate = 0.02f;
+                break;
+            case Difficulty.Medium:
+                globalSpeedMultiplier = 0.9f;
+                speedIncreaseRate = 0.04f;
+                spawnInterval = 3f;
+                spawnIncreaseRate = 0.04f;
+                break;
+            case Difficulty.Hard:
+                globalSpeedMultiplier = 1.1f;
+                speedIncreaseRate = 0.06f;
+                spawnInterval = 2f;
+                spawnIncreaseRate = 0.06f;
+                break;
+        }
     }
 }
