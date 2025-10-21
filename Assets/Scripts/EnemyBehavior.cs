@@ -88,9 +88,9 @@ public class EnemyBehavior : MonoBehaviour
             switch(state) {
                 case TimingState.Perfect: pulseColor = Color.red;
                     break;
-                case TimingState.Good: pulseColor = new Color(1f, 0.92f, 0.6f);
+                case TimingState.Good: pulseColor = new Color(1f, 1f, 0.5f, 0.5f);
                     break;
-                case TimingState.Okay: pulseColor = new Color(1f, 0.8f, 0.4f);
+                case TimingState.Okay: pulseColor = new Color(1f, 1f, 1f, 0.25f);
                     break;
             }
 
