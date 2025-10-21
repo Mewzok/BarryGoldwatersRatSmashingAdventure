@@ -61,19 +61,19 @@ public class RatSpawner : MonoBehaviour
     void SetupDifficulty() {
        // determine values based on difficulty
         switch(gameManager.currentDifficulty) {
-            case Difficulty.Easy:
+            case GameManager.Difficulty.Easy:
                 globalSpeedMultiplier = 0.7f;
                 speedIncreaseRate = 0.02f;
                 spawnInterval = 4f;
                 spawnIncreaseRate = 0.02f;
                 break;
-            case Difficulty.Medium:
+            case GameManager.Difficulty.Medium:
                 globalSpeedMultiplier = 0.9f;
                 speedIncreaseRate = 0.04f;
                 spawnInterval = 3f;
                 spawnIncreaseRate = 0.04f;
                 break;
-            case Difficulty.Hard:
+            case GameManager.Difficulty.Hard:
                 globalSpeedMultiplier = 1.1f;
                 speedIncreaseRate = 0.06f;
                 spawnInterval = 2f;
