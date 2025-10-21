@@ -15,7 +15,7 @@ public class RatSpawner : MonoBehaviour
     private float spawnTimer;
     public float spawnInterval = 3f;
     public float minSpawnInterval = 0.5f;
-    public float spawnIncreaseRate = 0.003f;
+    public float spawnIncreaseRate = 0.05f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

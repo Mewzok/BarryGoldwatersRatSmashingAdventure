@@ -716,6 +716,12 @@ MonoBehaviour:
   - {fileID: 3503017}
   - {fileID: 941974392}
   gameManager: {fileID: 1814215436}
+  globalSpeedMultiplier: 1
+  speedIncreaseRate: 0.05
+  maxGlobalSpeedMultiplier: 5
+  spawnInterval: 3
+  minSpawnInterval: 0.5
+  spawnIncreaseRate: 0.05
 --- !u!1 &1219414656
 GameObject:
   m_ObjectHideFlags: 0
