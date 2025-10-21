@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000c5027817
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -710,6 +710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ratPrefab: {fileID: 3381026579054873364, guid: 3adc295a979ad414a85099698ec37a17, type: 3}
+  auraPrefab: {fileID: 3027097104809917289, guid: eadd3e23a2cd641faac31f6c27899405, type: 3}
   spawnPoints:
   - {fileID: 1310154746}
   - {fileID: 311597078}

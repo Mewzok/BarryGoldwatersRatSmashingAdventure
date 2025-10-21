@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     private float ePos = 0.9f;
     private float rPos = 2.64f;
 
+    private float smashCooldown = 0.15f;
+    private float smashTimer = 0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,38 +25,37 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // check current animation state
-        var currentState = animator.GetCurrentAnimatorStateInfo(0);
+        // start smash cooldown timer
+        smashTimer -= Time.deltaTime;
 
-        // receive position
-        Vector3 pos = transform.position;
-
-        if(currentState.IsName("BarryIdle")) {
+        // allow cancel any time as long as cooldown is up
+        if(smashTimer <= 0f) {
             if(Input.GetKeyDown(KeyCode.Q)) {
-                pos = new Vector3(qPos, pos.y, pos.z);
-                animator.SetTrigger("DoAction");
-                gameManager.CheckHit(0);
+                TrySmash(qPos, 0);
             }
-
             if(Input.GetKeyDown(KeyCode.W)) {
-                pos = new Vector3(wPos, pos.y, pos.z);
-                animator.SetTrigger("DoAction");
-                gameManager.CheckHit(1);
+                TrySmash(wPos, 1);
             }
-
             if(Input.GetKeyDown(KeyCode.E)) {
-                pos = new Vector3(ePos, pos.y, pos.z);
-                animator.SetTrigger("DoAction");
-                gameManager.CheckHit(2);
+                TrySmash(ePos, 2);
             }
-
             if(Input.GetKeyDown(KeyCode.R)) {
-                pos = new Vector3(rPos, pos.y, pos.z);
-                animator.SetTrigger("DoAction");
-                gameManager.CheckHit(3);
+                TrySmash(rPos, 3);
             }
-
-            transform.position = pos;
         }
+    }
+
+    void TrySmash(float xPos, int lane) {
+        // move player
+        transform.position = new Vector3(xPos, transform.position.y, transform.position.z);
+
+        // run smash animation
+        animator.ResetTrigger("DoAction");
+        animator.Play("BarryIdle", 0, 0f);
+        animator.SetTrigger("DoAction");
+        gameManager.CheckHit(lane);
+
+        // begin cooldown
+        smashTimer = smashCooldown;
     }
 }

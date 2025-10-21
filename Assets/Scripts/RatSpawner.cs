@@ -3,6 +3,7 @@ using UnityEngine;
 public class RatSpawner : MonoBehaviour
 {
     public GameObject ratPrefab;
+    public GameObject auraPrefab;
     public Transform[] spawnPoints;
     public GameManager gameManager;
 
@@ -49,6 +50,10 @@ public class RatSpawner : MonoBehaviour
         rat.lane = randNum;
 
         rat.baseSpeed =  Random.Range(.5f, 2);
+
+        // attach rat aura
+        var aura = Instantiate(auraPrefab, ratObj.transform);
+        aura.transform.localPosition = Vector3.zero;
 
         gameManager.RegisterRat(rat);
     }

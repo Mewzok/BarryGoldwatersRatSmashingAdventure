@@ -25,7 +25,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // constantly update rat distance to target line
+        for(int i = activeRats.Count - 1; i >= 0; i--) {
+            var rat = activeRats[i];
+            if(rat == null) {
+                continue;
+            }
+            
+            float dist = Mathf.Abs(rat.transform.position.y - targetLineY);
+            rat.UpdateAuraFeedback(dist, perfect, good, okay, targetLineY);
+        }
     }
 
     public void CheckHit(int lane) {
@@ -58,7 +67,7 @@ public class GameManager : MonoBehaviour
         if(closestRat != null && closestDist <= okay && closestRat.transform.position.y < -3.90) {
             int points = 0;
 
-            if(closestDist <= perfect) {
+            if(closestRat.isPerfectActive || closestDist <= perfect) {
                 points += 3;
             } else if(closestDist <= good) {
                 points += 2;
