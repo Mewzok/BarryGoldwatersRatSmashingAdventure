@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameMode currentMode = GameMode.Election;
     public Difficulty currentDifficulty = Difficulty.Medium;
     public RatSpawner ratSpawner;
+    public Transform player;
 
     public int totalPoints = 0;
 
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
         // get rats in lane
         var ratsInLane = activeRats.FindAll(r => r.lane == lane);
         if(ratsInLane.Count == 0) {
-            return;
+            HandleMiss();
         }
 
         // find rat closest to target line, presumably the one meant to be smashed
@@ -125,6 +126,7 @@ public class GameManager : MonoBehaviour
             Destroy(closestRat.gameObject, 5f);
         } else {
             Debug.Log($"Miss on lane {lane}. ClosestDist={closestDist:F3}");
+            HandleMiss();
         }
     }
 
@@ -139,5 +141,17 @@ public class GameManager : MonoBehaviour
     void OnDrawGizmos() {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(new Vector3(-10, targetLineY, 0), new Vector3(10, targetLineY, 0));
+    }
+
+    void HandleMiss() {
+        // missed entirely
+        totalPoints = Mathf.Max(0, totalPoints - 1);
+
+        if(player != null) {
+            Vector3 missScreenPos = Camera.main.WorldToScreenPoint(player.position);
+            missScreenPos += new Vector3(50f, 100f, 0f); // shift slightly
+            FeedbackManager.Instance.ShowHitIndicator("Miss", missScreenPos);
+        }
+        return;
     }
 }

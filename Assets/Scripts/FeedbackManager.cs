@@ -11,6 +11,16 @@ public class FeedbackManager : MonoBehaviour
     public GameObject hitIndicatorPrefab;
     public Transform canvasTransform;
 
+    // gradients
+    public TMP_ColorGradient perfectGradient;
+    public TMP_ColorGradient goodGradient;
+    public TMP_ColorGradient okGradient;
+    public TMP_ColorGradient missGradient;
+
+    // fonts
+    public TMP_FontAsset perfectFont;
+    public TMP_FontAsset defaultFont;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -59,17 +69,35 @@ public class FeedbackManager : MonoBehaviour
         // set text
         var tmp = indicatorObj.GetComponent<TextMeshProUGUI>();
         tmp.text = text;
+        
+        // create animator and store reference
+        var anim = indicatorObj.AddComponent<HitIndicatorAnimator>();
 
         // set color based on hit timing
         switch(text) {
+            case "Miss":
+                tmp.colorGradientPreset = missGradient;
+                tmp.font = defaultFont;
+                anim.initialScale = 1.0f;
+                anim.targetScale = 0.8f;
+                break;
             case "OK":
-                tmp.color = Color.white;
+                tmp.colorGradientPreset = okGradient;
+                tmp.font = defaultFont;
+                anim.initialScale = 0.8f;
+                anim.targetScale = 1.0f;
                 break;
             case "Good":
-                tmp.color = Color.green;
+                tmp.colorGradientPreset = goodGradient;
+                tmp.font = defaultFont;
+                anim.initialScale = 0.9f;
+                anim.targetScale = 1.2f;
                 break;
             case "Perfect": 
-                tmp.color = Color.yellow;
+                tmp.colorGradientPreset = perfectGradient;
+                tmp.font = perfectFont;
+                anim.initialScale = 0.9f;
+                anim.targetScale = 1.4f;
                 break;
         }
 
@@ -80,7 +108,5 @@ public class FeedbackManager : MonoBehaviour
         // animate fade out and slight movement
         indicatorObj.GetComponent<CanvasGroup>().alpha = 1f;
         indicatorObj.transform.localScale = Vector3.one;
-
-        indicatorObj.AddComponent<HitIndicatorAnimator>();
     }
 }
