@@ -988,6 +988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMode: 0
   currentDifficulty: 1
+  ratSpawner: {fileID: 1018956964}
   totalPoints: 0
   activeRats: []
 --- !u!4 &1814215437

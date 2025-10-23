@@ -1,10 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class FeedbackManager : MonoBehaviour
 {
     public static FeedbackManager Instance;
     public GameObject burstPrefab;
+
+    [Header("Hit Indicator")]
+    public GameObject hitIndicatorPrefab;
+    public Transform canvasTransform;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,6 +23,7 @@ public class FeedbackManager : MonoBehaviour
         
     }
 
+    // rat smash effects
     public void PlaySmashEffects(Vector3 position) {
         if(burstPrefab != null) {
             Instantiate(burstPrefab, position, Quaternion.identity);
@@ -40,5 +46,41 @@ public class FeedbackManager : MonoBehaviour
         }
 
         cam.transform.position = originalPos;
+    }
+
+    // hit indicator text
+    void Awake() {
+        Instance = this;
+    }
+
+    public void ShowHitIndicator(string text, Vector3 worldPos) {
+        var indicatorObj = Instantiate(hitIndicatorPrefab, canvasTransform);
+
+        // set text
+        var tmp = indicatorObj.GetComponent<TextMeshProUGUI>();
+        tmp.text = text;
+
+        // set color based on hit timing
+        switch(text) {
+            case "OK":
+                tmp.color = Color.white;
+                break;
+            case "Good":
+                tmp.color = Color.green;
+                break;
+            case "Perfect": 
+                tmp.color = Color.yellow;
+                break;
+        }
+
+        // convert world position to screen position
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+        indicatorObj.transform.position = screenPos;
+
+        // animate fade out and slight movement
+        indicatorObj.GetComponent<CanvasGroup>().alpha = 1f;
+        indicatorObj.transform.localScale = Vector3.one;
+
+        indicatorObj.AddComponent<HitIndicatorAnimator>();
     }
 }

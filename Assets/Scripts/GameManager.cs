@@ -18,13 +18,14 @@ public class GameManager : MonoBehaviour
 
     public GameMode currentMode = GameMode.Election;
     public Difficulty currentDifficulty = Difficulty.Medium;
+    public RatSpawner ratSpawner;
 
     public int totalPoints = 0;
 
     // thresholds for determining points when rat smashed
     private float perfect = 0.1f;
-    private float good = 0.25f;
-    private float okay = 0.5f;
+    private float good = 0.3f;
+    private float okay = 0.6f;
 
     private float targetLineY = -4.10f;
 
@@ -33,7 +34,19 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if(!string.IsNullOrEmpty(GameSettings.difficulty)) {
+            if(System.Enum.TryParse(GameSettings.difficulty, true, out Difficulty parsedDiff)) {
+                currentDifficulty = parsedDiff;
+            }
+        }
+
+        if(!string.IsNullOrEmpty(GameSettings.mode)) {
+            if(System.Enum.TryParse(GameSettings.mode, true, out GameMode parsedMode)) {
+                currentMode = parsedMode;
+            }
+        }
+
+        ratSpawner.SetupDifficulty();
     }
 
     // Update is called once per frame
@@ -78,19 +91,22 @@ public class GameManager : MonoBehaviour
         Debug.Log($"ClosestDist={closestDist:F3}, ClosestRat={closestRat?.name ?? "none"}");
 
         // if there's at least one rat in lane, it's in at least "okay" range and it's within reach it's smashable
-        if(closestRat != null && closestDist <= okay && closestRat.transform.position.y < -3.90) {
+        if(closestRat != null && closestDist <= okay && closestRat.transform.position.y < -3.70) {
             int points = 0;
+            string hitText = "";
 
             if(closestRat.isPerfectActive || closestDist <= perfect) {
                 points += 3;
+                hitText = "Perfect";
             } else if(closestDist <= good) {
                 points += 2;
+                hitText = "Good";
             } else {
                 points += 1;
+                hitText = "OK";
             }
 
             Debug.Log($"Rat hit in lane {lane}, Distance {closestDist:F3}, Points: {points}");
-
 
             // animate smashed rat
             Animator animator = closestRat.GetComponent<Animator>();
@@ -101,6 +117,9 @@ public class GameManager : MonoBehaviour
 
             // play particle effects
             FeedbackManager.Instance.PlaySmashEffects(closestRat.transform.position);
+
+            // display hit indicator timing text
+            FeedbackManager.Instance.ShowHitIndicator(hitText, closestRat.transform.position);
 
             UnregisterRat(closestRat);
             Destroy(closestRat.gameObject, 5f);

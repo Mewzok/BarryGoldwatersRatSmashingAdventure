@@ -21,7 +21,7 @@ public class RatSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SetupDifficulty();
+
     }
 
     // Update is called once per frame
@@ -58,7 +58,9 @@ public class RatSpawner : MonoBehaviour
         gameManager.RegisterRat(rat);
     }
 
-    void SetupDifficulty() {
+    public void SetupDifficulty() {
+        Debug.Log($"Difficulty setup on difficulty {gameManager.currentDifficulty}");
+
        // determine values based on difficulty
         switch(gameManager.currentDifficulty) {
             case GameManager.Difficulty.Easy:

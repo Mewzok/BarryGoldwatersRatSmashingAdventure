@@ -48,12 +48,6 @@ public class EnemyBehavior : MonoBehaviour
 
     public void UpdateAuraFeedback(float distanceToTarget, float perfect, float good, float okay, float targetLineY) {
         // determine state based on distance
-
-        // prevent aura from firing if perfect is passed
-        if(lastState == TimingState.Perfect) {
-            return;
-        }
-
         TimingState state = TimingState.None;
 
         if(distanceToTarget <= perfect + 0.05f) { 
@@ -99,5 +93,8 @@ public class EnemyBehavior : MonoBehaviour
                 auraController.TriggerPulse(transform.position, pulseColor);
             }
         }
+
+        // reset perfect if not in perfect range
+        isPerfectActive = (state == TimingState.Perfect);
     }
 }
