@@ -214,6 +214,12 @@ MonoBehaviour:
   hitIndicatorPrefab: {fileID: 4473065552845812736, guid: 50faef45798e34ac59f8cfa0dcd6424e, type: 3}
   canvasTransform: {fileID: 472115237}
   perfectGradient: {fileID: 11400000, guid: 1c0107576dc3d49b3b72ca87b1344677, type: 2}
+  goodGradient: {fileID: 11400000, guid: 56b15335f985c4c99b72459340f7f5ea, type: 2}
+  okGradient: {fileID: 11400000, guid: 6221dad33d4514a0780deb5ca769cfa0, type: 2}
+  missGradient: {fileID: 11400000, guid: dc01ac3f642274c0b82d2b0537df0ad0, type: 2}
+  perfectFont: {fileID: 11400000, guid: ef5dac8d9010b4515a461b355cc3ca85, type: 2}
+  defaultFont: {fileID: 11400000, guid: 2ec5364534ef94f0bb5759f4fbe497eb, type: 2}
+  perfectSparklePrefab: {fileID: 1688221340060383361, guid: 1fcf51e9f8d9a47dca22621dd8308449, type: 3}
 --- !u!4 &318977451
 Transform:
   m_ObjectHideFlags: 0

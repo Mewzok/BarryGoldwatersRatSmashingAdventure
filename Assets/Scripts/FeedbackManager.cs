@@ -21,6 +21,9 @@ public class FeedbackManager : MonoBehaviour
     public TMP_FontAsset perfectFont;
     public TMP_FontAsset defaultFont;
 
+    // particles
+    public GameObject perfectSparklePrefab;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -73,31 +76,46 @@ public class FeedbackManager : MonoBehaviour
         // create animator and store reference
         var anim = indicatorObj.AddComponent<HitIndicatorAnimator>();
 
+        // set font material for stylizing text
+        var mat = tmp.fontMaterial;
+
         // set color based on hit timing
         switch(text) {
             case "Miss":
                 tmp.colorGradientPreset = missGradient;
                 tmp.font = defaultFont;
-                anim.initialScale = 1.0f;
-                anim.targetScale = 0.8f;
+                mat.SetColor("_OutlineColor", new Color(0.3f, 0f, 0f));
+                mat.SetFloat("_OutlineWidth", 0.1f);
+                anim.initialScale = 0.5f;
+                anim.targetScale = 0.4f;
                 break;
             case "OK":
                 tmp.colorGradientPreset = okGradient;
                 tmp.font = defaultFont;
-                anim.initialScale = 0.8f;
-                anim.targetScale = 1.0f;
+                anim.initialScale = 0.4f;
+                anim.targetScale = 0.5f;
                 break;
             case "Good":
                 tmp.colorGradientPreset = goodGradient;
                 tmp.font = defaultFont;
-                anim.initialScale = 0.9f;
-                anim.targetScale = 1.2f;
+                anim.initialScale = 0.45f;
+                anim.targetScale = 0.6f;
                 break;
             case "Perfect": 
                 tmp.colorGradientPreset = perfectGradient;
                 tmp.font = perfectFont;
-                anim.initialScale = 0.9f;
-                anim.targetScale = 1.4f;
+                mat.SetColor("_OutlineColor", new Color(1f, 0.9f, 0.2f));
+                mat.SetFloat("_OutlineWidth", 0.15f);
+                mat.SetColor("_GlowColor", new Color(1f, 0.8f, 0.1f));
+                mat.SetFloat("_GlowPower", 0.25f);
+                anim.initialScale = 0.45f;
+                anim.targetScale = 0.7f;
+
+                /*if(perfectSparklePrefab != null) {
+                    var sparkle = Instantiate(perfectSparklePrefab, indicatorObj.transform);
+                    sparkle.transform.localPosition = Vector3.zero; // center on text
+                    sparkle.transform.localScale = Vector3.one * 5.5f; // slightly smaller than full size
+                }*/
                 break;
         }
 
