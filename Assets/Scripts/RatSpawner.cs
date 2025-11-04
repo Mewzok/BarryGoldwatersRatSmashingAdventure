@@ -19,7 +19,7 @@ public class RatSpawner : MonoBehaviour
     public float spawnIncreaseRate = 0.05f;
 
     // rat number variables
-    private int numOfRatsToSpawn = 10; //180; // each rat is 3 points max, total score must be 538
+    private int numOfRatsToSpawn = 10; // each rat is 3 points max, total score must be 538
     private int numOfRatsSpawned = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -61,14 +61,18 @@ public class RatSpawner : MonoBehaviour
             aura.transform.localPosition = Vector3.zero;
 
             gameManager.RegisterRat(rat);
-            numOfRatsSpawned++;
+            if(gameManager.currentMode == GameManager.GameMode.Election) {
+                numOfRatsSpawned++;
+            }
+
+            Debug.Log($"Number of rats to spawn: {numOfRatsToSpawn}. Number of rats spawned: {numOfRatsSpawned}.");
         } else {
             endGame();
         }
     }
 
     public void SetupDifficulty() {
-        Debug.Log($"Difficulty setup on difficulty {gameManager.currentDifficulty}");
+        Debug.Log($"Difficulty setup on difficulty {gameManager.currentDifficulty} on {gameManager.currentMode} mode.");
 
        // determine values based on difficulty
         switch(gameManager.currentDifficulty) {

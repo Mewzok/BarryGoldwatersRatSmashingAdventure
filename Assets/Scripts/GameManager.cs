@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
         Hard
     }
 
-    public GameMode currentMode = GameMode.Election;
-    public Difficulty currentDifficulty = Difficulty.Medium;
+    public GameMode currentMode;
+    public Difficulty currentDifficulty;
     public RatSpawner ratSpawner;
     public Transform player;
 
@@ -42,12 +42,16 @@ public class GameManager : MonoBehaviour
         if(!string.IsNullOrEmpty(GameSettings.difficulty)) {
             if(System.Enum.TryParse(GameSettings.difficulty, true, out Difficulty parsedDiff)) {
                 currentDifficulty = parsedDiff;
+            } else {
+                currentDifficulty = Difficulty.Medium;
             }
         }
 
         if(!string.IsNullOrEmpty(GameSettings.mode)) {
             if(System.Enum.TryParse(GameSettings.mode, true, out GameMode parsedMode)) {
                 currentMode = parsedMode;
+            } else {
+                currentMode = GameMode.Election;
             }
         }
 
