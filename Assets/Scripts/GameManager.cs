@@ -72,81 +72,71 @@ public class GameManager : MonoBehaviour
     }
 
     public void CheckHit(int lane) {
-        Debug.Log($"CheckHit called for lane {lane}. Active rats: {activeRats.Count}");
-
         // get rats in lane
         var ratsInLane = activeRats.FindAll(r => r.lane == lane);
         if(ratsInLane.Count == 0) {
             HandleMiss();
+            return;
         }
 
-        // find rat closest to target line, presumably the one meant to be smashed
-        // initialize values
-        EnemyBehavior closestRat = null;
-        float closestDist = float.MaxValue;
+        bool hitSomething = false;
 
         // check each rat in lane and check distance from rat to target line at absolute value
-        // assign each closest distance to closestDist and make that the closest rat
         foreach(var rat in ratsInLane) {
             float dist = Mathf.Abs(rat.transform.position.y - targetLineY);
-            if(dist < closestDist) {
-                closestDist = dist;
-                closestRat = rat;
+
+            // if there's at least one rat in lane, it's in at least "okay" range and it's within reach it's smashable
+            if(dist <= okay && rat.transform.position.y < -3.70) {
+                hitSomething = true;
+
+                int points = 0;
+                string hitText = "";
+
+                if(rat.isPerfectActive || dist <= perfect) {
+                    points += 3;
+                    hitText = "Perfect";
+                } else if(dist <= good) {
+                    points += 2;
+                    hitText = "Good";
+                } else {
+                    points += 1;
+                    hitText = "OK";
+                }
+
+                Debug.Log($"Rat hit in lane {lane}, Distance {dist:F3}, Points: {points}, TotalPoints: {totalPoints}");
+
+                // animate smashed rat
+                Animator animator = rat.GetComponent<Animator>();
+                animator.SetTrigger("SmashRat");
+
+                // stop rat movement
+                rat.isSmashed = true;
+
+                // play particle effects
+                FeedbackManager.Instance.PlaySmashEffects(rat.transform.position);
+
+                // display hit indicator timing text
+                FeedbackManager.Instance.ShowHitIndicator(hitText, rat.transform.position);
+
+                UnregisterRat(rat);
+                Destroy(rat.gameObject, 5f);
+
+                totalPoints += points;
             }
         }
 
-        Debug.Log($"ClosestDist={closestDist:F3}, ClosestRat={closestRat?.name ?? "none"}");
-
-        // if there's at least one rat in lane, it's in at least "okay" range and it's within reach it's smashable
-        if(closestRat != null && closestDist <= okay && closestRat.transform.position.y < -3.70) {
-            int points = 0;
-            string hitText = "";
-
-            if(closestRat.isPerfectActive || closestDist <= perfect) {
-                points += 3;
-                hitText = "Perfect";
-            } else if(closestDist <= good) {
-                points += 2;
-                hitText = "Good";
-            } else {
-                points += 1;
-                hitText = "OK";
-            }
-
-            Debug.Log($"Rat hit in lane {lane}, Distance {closestDist:F3}, Points: {points}");
-
-            // animate smashed rat
-            Animator animator = closestRat.GetComponent<Animator>();
-            animator.SetTrigger("SmashRat");
-
-            // stop rat movement
-            closestRat.isSmashed = true;
-
-            // play particle effects
-            FeedbackManager.Instance.PlaySmashEffects(closestRat.transform.position);
-
-            // display hit indicator timing text
-            FeedbackManager.Instance.ShowHitIndicator(hitText, closestRat.transform.position);
-
-            UnregisterRat(closestRat);
-            Destroy(closestRat.gameObject, 5f);
-
-            // add points and check if player has passed win threshold
-            totalPoints += points;
-            if(totalPoints > perfectScore) {
-                totalPoints = perfectScore;
-            }
-            Debug.Log($"Total Points: {totalPoints}");
-
-            if(totalPoints >= pointsToWin) {
-                playerHasWon = true;
-            }
-            if(totalPoints == perfectScore) {
-                perfectGame = true;
-            }
-        } else {
-            Debug.Log($"Miss on lane {lane}. ClosestDist={closestDist:F3}");
+        // handle miss if no rats were close enough
+        if(!hitSomething) {
             HandleMiss();
+        }
+
+        // add points and check if player has passed win threshold
+        totalPoints = Mathf.Min(totalPoints, perfectScore);
+        if(totalPoints >= pointsToWin) {
+            playerHasWon = true;
+        }
+        if(totalPoints == perfectScore) {
+            perfectGame = true;
         }
     }
 
