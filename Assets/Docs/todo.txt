@@ -5,5 +5,4 @@ To do:
 -Current score/score to win
 -Graphic to show points raising to fill empty space on side bars
 -End screen
--Q/W/E/R graphics in dirt
 -Cap total points at 538

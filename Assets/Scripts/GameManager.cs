@@ -135,6 +135,9 @@ public class GameManager : MonoBehaviour
 
             // add points and check if player has passed win threshold
             totalPoints += points;
+            if(totalPoints > perfectScore) {
+                totalPoints = perfectScore;
+            }
             Debug.Log($"Total Points: {totalPoints}");
 
             if(totalPoints >= pointsToWin) {
