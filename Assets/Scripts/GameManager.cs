@@ -39,20 +39,18 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(!string.IsNullOrEmpty(GameSettings.difficulty)) {
-            if(System.Enum.TryParse(GameSettings.difficulty, true, out Difficulty parsedDiff)) {
+        if(!string.IsNullOrEmpty(GameSettings.difficulty) && 
+            System.Enum.TryParse(GameSettings.difficulty, true, out Difficulty parsedDiff)) {
                 currentDifficulty = parsedDiff;
-            } else {
+        } else {
                 currentDifficulty = Difficulty.Medium;
-            }
         }
 
-        if(!string.IsNullOrEmpty(GameSettings.mode)) {
-            if(System.Enum.TryParse(GameSettings.mode, true, out GameMode parsedMode)) {
+        if(!string.IsNullOrEmpty(GameSettings.mode) && 
+            System.Enum.TryParse(GameSettings.mode, true, out GameMode parsedMode)) {
                 currentMode = parsedMode;
-            } else {
-                currentMode = GameMode.Election;
-            }
+        } else {
+            currentMode = GameMode.Endless;
         }
 
         ratSpawner.SetupDifficulty();
@@ -170,9 +168,7 @@ public class GameManager : MonoBehaviour
         totalPoints = Mathf.Max(0, totalPoints - 1);
 
         if(player != null) {
-            Vector3 missScreenPos = Camera.main.WorldToScreenPoint(player.position);
-            missScreenPos += new Vector3(50f, 100f, 0f); // shift slightly
-            FeedbackManager.Instance.ShowHitIndicator("Miss", missScreenPos);
+            FeedbackManager.Instance.ShowHitIndicator("Miss", player.transform.position);
         }
         return;
     }

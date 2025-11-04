@@ -64,8 +64,6 @@ public class RatSpawner : MonoBehaviour
             if(gameManager.currentMode == GameManager.GameMode.Election) {
                 numOfRatsSpawned++;
             }
-
-            Debug.Log($"Number of rats to spawn: {numOfRatsToSpawn}. Number of rats spawned: {numOfRatsSpawned}.");
         } else {
             endGame();
         }

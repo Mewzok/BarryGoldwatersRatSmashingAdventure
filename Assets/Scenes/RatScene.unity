@@ -1147,7 +1147,7 @@ MonoBehaviour:
   currentMode: 0
   currentDifficulty: 1
   ratSpawner: {fileID: 1018956964}
-  player: {fileID: 0}
+  player: {fileID: 2042014033}
   totalPoints: 0
   activeRats: []
 --- !u!4 &1814215437
@@ -1349,6 +1349,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneKey: 0
+--- !u!4 &2042014033 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4888526752293056105, guid: e0f253b98475147a0a9311d02c47611b, type: 3}
+  m_PrefabInstance: {fileID: 4406496988899942780}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2053790238
 GameObject:
   m_ObjectHideFlags: 0
