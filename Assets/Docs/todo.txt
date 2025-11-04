@@ -2,6 +2,7 @@ Bugs:
 -Maybe check why there's a slight lag spike upon first button pressed... sometimes?
 
 To do:
+-Maybe resize flag on title screen?
 -Current score/score to win
 -Graphic to show points raising to fill empty space on side bars
 -End screen

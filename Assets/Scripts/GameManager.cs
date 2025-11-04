@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
     private float good = 0.3f;
     private float okay = 0.6f;
 
+    // point UI variables
+    public RectTransform blueBar;
+    public RectTransform redBar;
+
     private float targetLineY = -4.10f;
 
     public List<EnemyBehavior> activeRats = new List<EnemyBehavior>();
@@ -134,10 +138,15 @@ public class GameManager : MonoBehaviour
         totalPoints = Mathf.Min(totalPoints, perfectScore);
         if(totalPoints >= pointsToWin) {
             playerHasWon = true;
+        } else {
+            playerHasWon = false;
         }
         if(totalPoints == perfectScore) {
             perfectGame = true;
         }
+
+        // update points UI
+        UpdateScoreVisual();
     }
 
     public void RegisterRat(EnemyBehavior rat) {
@@ -160,6 +169,18 @@ public class GameManager : MonoBehaviour
         if(player != null) {
             FeedbackManager.Instance.ShowHitIndicator("Miss", player.transform.position);
         }
+
+        // update point UI
+        UpdateScoreVisual();
+
         return;
+    }
+
+    void UpdateScoreVisual() {
+        float fillRatio = totalPoints / perfectScore;
+        fillRatio = Mathf.Clamp01(fillRatio);
+
+        float totalHeight = ((RectTransform)blueBar.parent).rect.height;
+        redBar.sizeDelta = new Vector2(redBar.sizeDelta.x, totalHeight * fillRatio);
     }
 }
