@@ -18,6 +18,10 @@ public class RatSpawner : MonoBehaviour
     public float minSpawnInterval = 0.5f;
     public float spawnIncreaseRate = 0.05f;
 
+    // rat number variables
+    private int numOfRatsToSpawn = 10; //180; // each rat is 3 points max, total score must be 538
+    private int numOfRatsSpawned = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,20 +46,25 @@ public class RatSpawner : MonoBehaviour
     }
 
     void SpawnRat() {
-        int randNum = Random.Range(0, spawnPoints.Length);
-        Transform spawnPoint = spawnPoints[randNum];
+        if(numOfRatsSpawned < numOfRatsToSpawn) {
+            int randNum = Random.Range(0, spawnPoints.Length);
+            Transform spawnPoint = spawnPoints[randNum];
 
-        GameObject ratObj = Instantiate(ratPrefab, spawnPoint.position, Quaternion.identity);
-        EnemyBehavior rat = ratObj.GetComponent<EnemyBehavior>();
-        rat.lane = randNum;
+            GameObject ratObj = Instantiate(ratPrefab, spawnPoint.position, Quaternion.identity);
+            EnemyBehavior rat = ratObj.GetComponent<EnemyBehavior>();
+            rat.lane = randNum;
 
-        rat.baseSpeed =  Random.Range(.5f, 2);
+            rat.baseSpeed =  Random.Range(.5f, 2);
 
-        // attach rat aura
-        var aura = Instantiate(auraPrefab, ratObj.transform);
-        aura.transform.localPosition = Vector3.zero;
+            // attach rat aura
+            var aura = Instantiate(auraPrefab, ratObj.transform);
+            aura.transform.localPosition = Vector3.zero;
 
-        gameManager.RegisterRat(rat);
+            gameManager.RegisterRat(rat);
+            numOfRatsSpawned++;
+        } else {
+            endGame();
+        }
     }
 
     public void SetupDifficulty() {
@@ -82,5 +91,9 @@ public class RatSpawner : MonoBehaviour
                 spawnIncreaseRate = 0.06f;
                 break;
         }
+    }
+
+    public void endGame() {
+        // wait until final rat is destroyed in one way or another, then display end screen
     }
 }

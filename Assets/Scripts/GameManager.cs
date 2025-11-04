@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
     public Transform player;
 
     public int totalPoints = 0;
+    private int pointsToWin = 270;
+    private int perfectScore = 538;
+    private bool playerHasWon = false;
+    private bool perfectGame = false;
 
     // thresholds for determining points when rat smashed
     private float perfect = 0.1f;
@@ -124,6 +128,17 @@ public class GameManager : MonoBehaviour
 
             UnregisterRat(closestRat);
             Destroy(closestRat.gameObject, 5f);
+
+            // add points and check if player has passed win threshold
+            totalPoints += points;
+            Debug.Log($"Total Points: {totalPoints}");
+
+            if(totalPoints >= pointsToWin) {
+                playerHasWon = true;
+            }
+            if(totalPoints == perfectScore) {
+                perfectGame = true;
+            }
         } else {
             Debug.Log($"Miss on lane {lane}. ClosestDist={closestDist:F3}");
             HandleMiss();
