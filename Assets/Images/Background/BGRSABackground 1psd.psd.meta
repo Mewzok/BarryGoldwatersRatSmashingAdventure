@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 90fff48583fbe4c4fac7aa704ba40fa3
+guid: 2991d106cc95c4ca7905f091d7e2e9fc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -247453449831562838
-    second: BGRSABackground 2_0
+      213: 8426561132882264584
+    second: BGRSABackground 1psd_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BGRSABackground 2_0
+      name: BGRSABackground 1psd_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa14850066ed09cf0800000000000000
-      internalID: -247453449831562838
+      spriteID: 8028f8b54b821f470800000000000000
+      internalID: 8426561132882264584
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BGRSABackground 2_0: -247453449831562838
+      BGRSABackground 1psd_0: 8426561132882264584
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
