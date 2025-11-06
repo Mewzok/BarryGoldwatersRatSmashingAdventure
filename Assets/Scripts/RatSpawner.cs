@@ -22,6 +22,10 @@ public class RatSpawner : MonoBehaviour
     private int numOfRatsToSpawn = 10; // each rat is 3 points max, total score must be 538
     private int numOfRatsSpawned = 0;
 
+    // public getters for GameManager
+    public int NumOfRatsToSpawn => numOfRatsToSpawn;
+    public int NumOfRatsSpawned => numOfRatsSpawned;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Difficulty currentDifficulty;
     public RatSpawner ratSpawner;
     public Transform player;
+    public ElectoralUI electoralUI;
 
     public int totalPoints = 0;
     private int pointsToWin = 270;
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
             currentMode = GameMode.Endless;
         }
 
+        electoralUI.currentMode = currentMode;
         ratSpawner.SetupDifficulty();
     }
 
@@ -147,6 +149,9 @@ public class GameManager : MonoBehaviour
 
         // update points UI
         UpdateScoreVisual();
+        int remainingRats = ratSpawner.NumOfRatsToSpawn - ratSpawner.NumOfRatsSpawned;
+        electoralUI.UpdateLeftPanel(totalPoints, perfectScore, remainingRats);
+        electoralUI.UpdateTargetFill(totalPoints);
     }
 
     public void RegisterRat(EnemyBehavior rat) {
