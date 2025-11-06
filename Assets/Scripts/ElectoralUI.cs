@@ -23,6 +23,7 @@ public class ElectoralUI : MonoBehaviour
     [Header("Left Panel Texts")]
     public TMP_Text pointsText;
     public TMP_Text remainingRatsText;
+    public TMP_Text titleText;
 
     [Header("Mode Info")]
     public GameManager.GameMode currentMode;
@@ -51,6 +52,7 @@ public class ElectoralUI : MonoBehaviour
             displayedFill = 1f;
             targetFill = 1f;
             ApplyFill(healthFill);
+
         }
 
         if(healthText != null && currentMode == GameManager.GameMode.Endless) {
@@ -156,6 +158,19 @@ public class ElectoralUI : MonoBehaviour
         // always update text immediately
         if(healthText != null) {
             healthText.text = $"{currentHealth}";
+        }
+    }
+
+    public void SetupLeftPanelTitle() {
+        // handle "title" text
+        if(titleText == null) {
+            return;
+        } else {
+            if(currentMode == GameManager.GameMode.Election) {
+                titleText.text = $"{winThreshold} to Win";
+            } else {
+                titleText.text = "Endless";
+            }
         }
     }
 }

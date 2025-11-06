@@ -1,6 +1,7 @@
 // handles game logic, mechanics
 
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour
             electoralUI.UpdateHealthBar(currentHealth, maxHealth);
         }
 
+        StartCoroutine(SetupTitleNextFrame());
         UpdateUI();
         ratSpawner.SetupDifficulty();
     }
@@ -215,5 +217,10 @@ public class GameManager : MonoBehaviour
         if(currentMode == GameMode.Election) {
             electoralUI.UpdateTargetFill(totalPoints);
         }
+    }
+
+    private IEnumerator SetupTitleNextFrame() {
+        yield return null;
+        electoralUI.SetupLeftPanelTitle();
     }
 }

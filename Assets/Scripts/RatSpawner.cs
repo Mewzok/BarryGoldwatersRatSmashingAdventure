@@ -19,7 +19,7 @@ public class RatSpawner : MonoBehaviour
     public float spawnIncreaseRate = 0.05f;
 
     // rat number variables
-    private int numOfRatsToSpawn = 10; // each rat is 3 points max, total score must be 538
+    private int numOfRatsToSpawn = 180; // each rat is 3 points max, total score must be 538
     private int numOfRatsSpawned = 0;
 
     // public getters for GameManager

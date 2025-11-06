@@ -843,7 +843,11 @@ MonoBehaviour:
   bounceSpeed: 8
   pointsText: {fileID: 1114327575}
   remainingRatsText: {fileID: 1443815860}
+  titleText: {fileID: 0}
   currentMode: 0
+  healthText: {fileID: 1182663453}
+  maxHealth: 0
+  currentHealth: 0
 --- !u!4 &543439337
 Transform:
   m_ObjectHideFlags: 0
@@ -2135,6 +2139,8 @@ MonoBehaviour:
   blueBar: {fileID: 585248186}
   redBar: {fileID: 1537868751}
   activeRats: []
+  maxHealth: 0
+  currentHealth: 0
 --- !u!4 &1814215437
 Transform:
   m_ObjectHideFlags: 0
