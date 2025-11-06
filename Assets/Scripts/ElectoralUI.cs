@@ -27,6 +27,14 @@ public class ElectoralUI : MonoBehaviour
     [Header("Mode Info")]
     public GameManager.GameMode currentMode;
 
+    [Header("Health")]
+    public TMP_Text healthText;
+
+    [Header("Health Settings")]
+    public int maxHealth;
+    public int currentHealth;
+    private float healthFill = 1f;
+
     // internal
     private float displayedFill = 0f;
     private float targetFill = 0f;
@@ -34,9 +42,20 @@ public class ElectoralUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // initialize sizes
-        UpdateTargetFillImmediate(0);
-        ApplyFill(0);
+        if(currentMode == GameManager.GameMode.Election) {
+            // initialize sizes
+            UpdateTargetFillImmediate(0);
+        } else {
+            currentHealth = maxHealth;
+            healthFill = 1f;
+            displayedFill = 1f;
+            targetFill = 1f;
+            ApplyFill(healthFill);
+        }
+
+        if(healthText != null && currentMode == GameManager.GameMode.Endless) {
+            healthText.text = $"{currentHealth}";
+        }
     }
 
     // Update is called once per frame
@@ -66,7 +85,7 @@ public class ElectoralUI : MonoBehaviour
     }
 
     private void ApplyFill(float fill) {
-        if(rightBarPanel == null || redBar == null || grayLine == null) {
+        if(rightBarPanel == null || redBar == null) {
             return;
         }
 
@@ -76,15 +95,42 @@ public class ElectoralUI : MonoBehaviour
         // smooth bounce offset towards 0
         bounceOffset = Mathf.Lerp(bounceOffset, 0f, Time.deltaTime * bounceSpeed);
 
-        // set red bar height
-        float newHeight = parentHeight * fill;
-        newHeight = Mathf.Clamp(newHeight, 0f, parentHeight);
-        redBar.sizeDelta = new Vector2(0f, newHeight);
+        // right bar UI for Election Mode
+        if(currentMode == GameManager.GameMode.Election) {
+            // set red bar height
+            float newHeight = parentHeight * fill;
+            newHeight = Mathf.Clamp(newHeight, 0f, parentHeight);
+            redBar.sizeDelta = new Vector2(0f, newHeight);
 
-        // place threshold line
-        float thresholdRatio = (float)winThreshold / (float)totalElectoralVotes;
-        float thresholdY = parentHeight * thresholdRatio;
-        grayLine.anchoredPosition = new Vector2(grayLine.anchoredPosition.x, thresholdY);
+            // place threshold line
+            float thresholdRatio = (float)winThreshold / (float)totalElectoralVotes;
+            float thresholdY = parentHeight * thresholdRatio;
+            grayLine.gameObject.SetActive(true);
+            grayLine.anchoredPosition = new Vector2(grayLine.anchoredPosition.x, thresholdY);
+
+            // hide health text
+            if(healthText != null) {
+                healthText.gameObject.SetActive(false);
+            }
+        } else {
+            // set red bar height
+            float newHeight = parentHeight * healthFill;
+            newHeight = Mathf.Clamp(newHeight, 0f, parentHeight);
+            redBar.sizeDelta = new Vector2(0f, newHeight);
+
+            // hide gray line
+            grayLine.gameObject.SetActive(false);
+
+            // show health text
+            if(healthText != null) {
+                healthText.gameObject.SetActive(true);
+                healthText.text = $"{currentHealth}";
+            }
+
+            Color full = new Color(1f, 0f, 0f);
+            Color empty = new Color(0.3f, 0f, 0f);
+            redBar.GetComponent<UnityEngine.UI.Image>().color = Color.Lerp(empty, full, healthFill);
+        }
     }
 
     public void UpdateLeftPanel(int points, int totalPoints, int remainingRats) {
@@ -94,6 +140,22 @@ public class ElectoralUI : MonoBehaviour
         } else {
             pointsText.text = $"Score:\n{points}";
             remainingRatsText.text = $"Rats Remaining:\n∞";
+        }
+    }
+
+    public void UpdateHealthBar(int current, int max) {
+        if(currentMode != GameManager.GameMode.Endless) {
+            return;
+        }
+
+        currentHealth = current;
+        maxHealth = max;
+
+        healthFill = Mathf.Clamp01((float)current / (float)max);
+
+        // always update text immediately
+        if(healthText != null) {
+            healthText.text = $"{currentHealth}";
         }
     }
 }

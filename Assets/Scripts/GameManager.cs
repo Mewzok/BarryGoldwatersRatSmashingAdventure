@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour
 
     public List<EnemyBehavior> activeRats = new List<EnemyBehavior>();
 
+    // health system
+    public int maxHealth;
+    public int currentHealth;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -59,6 +63,23 @@ public class GameManager : MonoBehaviour
         }
 
         electoralUI.currentMode = currentMode;
+
+        // initialize health if endless
+        if(currentMode == GameMode.Endless) {
+            switch (currentDifficulty) {
+                case Difficulty.Easy: maxHealth = 25;
+                    break;
+                case Difficulty.Medium: maxHealth = 15;
+                    break;
+                case Difficulty.Hard: maxHealth = 5;
+                    break;
+            }
+
+            currentHealth = maxHealth;
+            electoralUI.UpdateHealthBar(currentHealth, maxHealth);
+        }
+
+        UpdateUI();
         ratSpawner.SetupDifficulty();
     }
 
@@ -148,10 +169,7 @@ public class GameManager : MonoBehaviour
         }
 
         // update points UI
-        UpdateScoreVisual();
-        int remainingRats = ratSpawner.NumOfRatsToSpawn - ratSpawner.NumOfRatsSpawned;
-        electoralUI.UpdateLeftPanel(totalPoints, perfectScore, remainingRats);
-        electoralUI.UpdateTargetFill(totalPoints);
+        UpdateUI();
     }
 
     public void RegisterRat(EnemyBehavior rat) {
@@ -176,7 +194,7 @@ public class GameManager : MonoBehaviour
         }
 
         // update point UI
-        UpdateScoreVisual();
+        UpdateUI();
 
         return;
     }
@@ -187,5 +205,15 @@ public class GameManager : MonoBehaviour
 
         float totalHeight = ((RectTransform)blueBar.parent).rect.height;
         redBar.sizeDelta = new Vector2(redBar.sizeDelta.x, totalHeight * fillRatio);
+    }
+
+    private void UpdateUI() {
+        UpdateScoreVisual();
+        int remainingRats = ratSpawner.NumOfRatsToSpawn - ratSpawner.NumOfRatsSpawned;
+        electoralUI.UpdateLeftPanel(totalPoints, perfectScore, remainingRats);
+
+        if(currentMode == GameMode.Election) {
+            electoralUI.UpdateTargetFill(totalPoints);
+        }
     }
 }
